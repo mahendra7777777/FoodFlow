@@ -1,0 +1,19 @@
+# Java / Maven
+Backend/foodflow/target/
+Backend/foodflow/.idea/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Node
+Frontend/foodflow-frontend/node_modules/
+Frontend/foodflow-frontend/dist/
+
+# Environment files
+.env
+*.env
+
+# OS
+.DS_Store
+Thumbs.db
