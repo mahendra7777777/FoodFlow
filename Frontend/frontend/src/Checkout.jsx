@@ -107,7 +107,7 @@ function Checkout({
 
     try {
       const response = await fetch(
-        "http://localhost:8081/api/orders",
+        "https://foodflow-backend-kgzn.onrender.com/api/orders",
         {
           method: "POST",
           headers: {

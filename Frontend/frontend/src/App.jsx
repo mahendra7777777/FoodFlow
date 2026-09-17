@@ -20,7 +20,7 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8081/api/restaurants")
+    fetch("https://foodflow-backend-kgzn.onrender.com/api/restaurants")
       .then(response => response.json())
       .then(data => setRestaurants(data))
       .catch(error => {

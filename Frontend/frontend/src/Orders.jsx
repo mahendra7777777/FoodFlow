@@ -11,7 +11,7 @@ function Orders({ currentUser, goBack }) {
       return;
     }
 
-    fetch(`http://localhost:8081/api/orders/user/${currentUser.id}`)
+    fetch(`https://foodflow-backend-kgzn.onrender.com/api/orders/user/${currentUser.id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch orders");
