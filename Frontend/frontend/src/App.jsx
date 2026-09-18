@@ -1,4 +1,5 @@
 import Login from "./Login";
+import Signup from "./Signup";
 import Checkout from "./Checkout";
 import Menu from "./Menu";
 import Cart from "./Cart";
@@ -43,16 +44,30 @@ function App() {
   // MENU
   // =========================
 if (page === "login") {
-  return (
-    <Login
-      onLogin={(user) => {
-        setCurrentUser(user);
-        setIsLoggedIn(true);
-        setPage("home");
-      }}
-    />
-  );
-}
+   return (
+     <Login
+       onLogin={(user) => {
+         setCurrentUser(user);
+         setIsLoggedIn(true);
+         setPage("home");
+       }}
+       goToSignup={() => setPage("signup")}
+     />
+   );
+ }
+
+ if (page === "signup") {
+   return (
+     <Signup
+       onSignup={(user) => {
+         setCurrentUser(user);
+         setIsLoggedIn(true);
+         setPage("home");
+       }}
+       goToLogin={() => setPage("login")}
+     />
+   );
+ }
   if (page === "menu" && selectedRestaurant) {
     return (
       <Menu

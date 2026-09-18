@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "./Login.css";
 
-function Login({ onLogin, goToSignup }) {
+function Signup({ onSignup, goToLogin }) {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -10,8 +11,8 @@ function Login({ onLogin, goToSignup }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      setError("Please enter your email and password.");
+    if (!name || !email || !password) {
+      setError("Please fill in all fields.");
       return;
     }
 
@@ -20,30 +21,31 @@ function Login({ onLogin, goToSignup }) {
 
     try {
       const response = await fetch(
-        "https://foodflow-backend-kgzn.onrender.com/api/users/login",
+        "https://foodflow-backend-kgzn.onrender.com/api/users/signup",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            email: email,
-            password: password
+            name,
+            email,
+            password
           })
         }
       );
 
       if (!response.ok) {
         const message = await response.text();
-        throw new Error(message || "Invalid email or password");
+        throw new Error(message || "Signup failed");
       }
 
       const user = await response.json();
 
-      onLogin(user);
+      onSignup(user);
 
     } catch (error) {
-      setError(error.message || "Invalid email or password");
+      setError(error.message || "Signup failed");
     } finally {
       setLoading(false);
     }
@@ -75,13 +77,24 @@ function Login({ onLogin, goToSignup }) {
       <div className="login-right">
         <div className="login-card">
 
-          <h2>Welcome back</h2>
+          <h2>Create an account</h2>
 
           <p className="login-subtitle">
-            Login to continue to FoodFlow
+            Sign up to start ordering from FoodFlow
           </p>
 
           <form onSubmit={handleSubmit}>
+
+            <div className="form-group">
+              <label>Name</label>
+
+              <input
+                type="text"
+                placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
 
             <div className="form-group">
               <label>Email address</label>
@@ -99,7 +112,7 @@ function Login({ onLogin, goToSignup }) {
 
               <input
                 type="password"
-                placeholder="Enter your password"
+                placeholder="Create a password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -116,14 +129,14 @@ function Login({ onLogin, goToSignup }) {
               className="login-button"
               disabled={loading}
             >
-              {loading ? "Logging in..." : "Login"}
+              {loading ? "Creating account..." : "Create account"}
             </button>
 
           </form>
 
           <p className="signup-text">
-            Don't have an account?{" "}
-          <span onClick={goToSignup}>Sign up</span>
+            Already have an account?{" "}
+            <span onClick={goToLogin}>Login</span>
           </p>
 
         </div>
@@ -133,4 +146,4 @@ function Login({ onLogin, goToSignup }) {
   );
 }
 
-export default Login;
+export default Signup;
