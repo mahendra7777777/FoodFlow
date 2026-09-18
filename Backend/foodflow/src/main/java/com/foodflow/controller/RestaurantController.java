@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+
 public class RestaurantController {
 
     @GetMapping("/api/restaurants")
